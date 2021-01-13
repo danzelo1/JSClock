@@ -6,15 +6,23 @@
 	<link rel="stylesheet" href="style.css" >
 </head>
 <body>
+	<! we want to create a div to hold all of our clock data>
 	<div class="clock" id="clock"></div>
+	<! this is our javascript script that will generate the date and time>
 	<script type="text/javascript">
 		function showTime(){
+			//Date() returns the date on your local machine, getHours
+			//returns the hour on your local machine (military time)
+			//and so on and so forth
 			var day = new Date();
 			var h = day.getHours();
 			var m = day.getMinutes();
 			var s = day.getSeconds();
+			//we want a 12 hour clock, so we'll set a variable to show
+			//whethere its the morning or night
 			var session = "AM";
 
+			//change hour variables so we have a 12 hour clock
 			if(h == 0){
 				h = 12;
 			}
@@ -24,6 +32,8 @@
 				session = "PM";
 			}
 
+			//these conditionals make sure there's a 0 preceding any
+			//single digit numbers so our clock looks uniform
 			if(h < 10){
 				h = "0" + h;
 			}
@@ -36,10 +46,13 @@
 				s = "0" + s;
 			}
 
+			//concatenate the time into a single string
 			var time = h + ":" + m + ":" + s + " " + session;
+			//print the time onto the webpage
 			document.getElementById("clock").innerText = time;
 			document.getElementById("clock").textContent = time;
 
+			//this makes sure the time is updated every second
 			setTimeout(showTime, 1000)
 		}
 		showTime();

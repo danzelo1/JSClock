@@ -4,15 +4,64 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+	
+	<! links to our style sheet and our javascript script>
+	
 	<link href="style.css" rel="stylesheet">
 	<script defer src="script.js"></script>
 	<title>Analog Clock</title>
 </head>
 <body>
+	
+	<! this form will allow users to input their timezone>
+	
+	<form>
+		<div class="timezone">
+			<p>Select Timezone:</p>
+
+			<! we will use radio buttons because they only allow for one
+			option to be selected>
+			<! they all have the same name value so we can group them
+			together, but differen names and values so we can style them
+			differently and change the clock based on the selecte item>
+			<! we will use labels to print text next to the buttons>
+			
+			<input type="radio" id="est" name="tz" value="est">
+			<label for="est">Eastern Standard Time</label><br>
+			<input type="radio" id="cst" name="tz" value="cst">
+			<label for="cst">Central Standard Time</label><br>
+			<input type="radio" id="mst" name="tz" value="mst">
+			<label for="mst">Mountain Standard Time</label><br>
+			<input type="radio" id="pst" name="tz" value="pst">
+			<label for="pst">Pacific Standard Time</label><br>
+			<input type="radio" id="ast" name="tz" value="ast">
+			<label for="ast">Alaska Standard Time</label><br>
+			<input type="radio" id="hst" name="tz" value="hst">
+			<label for="hst">Hawaii-Aleutian Standard Time</label><br>
+			<br>
+			
+			<! finally, we'll add a submit button so that we know when the 
+			user has made their selection>
+			
+			<button type="button" value="Submit" onclick="changeClock()"> Submit </button>
+			<br>
+			<div id="result"></div> 
+		</div>
+	</form>
+
+	<! the clock class allows us to group our hands and numbers to make 
+	sure they all end up in one place on the page>
+
 	<div class="clock">
+
+		<! our hand divs that will rotate to tell the time>
+
 		<div class="hand hour" data-hour-hand></div>
 		<div class="hand minute" data-minute-hand></div>
 		<div class="hand second" data-second-hand></div>
+
+		<! our number divs that will represent the numbers on the clock>
+		
 		<div class="number number1">1</div>
 		<div class="number number2">2</div>
 		<div class="number number3">3</div>

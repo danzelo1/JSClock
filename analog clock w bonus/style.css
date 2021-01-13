@@ -4,33 +4,57 @@
 }
 
 body{
+	/* this defines the background color and the element alignment of the page*/
 	background: #a5b8d9;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	/* by setting overflow to hidden, we eliminate the need for a scrollbar */
 	overflow: hidden;
 }
 
+/* here, we customize the appearance of the text associated with
+the timezone section of the page */
+.timezone {
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: 16px;
+	padding: 20px;
+	margin-right: 50px;
+}
+
+/* we build the clock into a 300x300 square, and set the border-radius
+to 50% so that it is a circle with a 300px diameter. we also add a 
+solid 2px black border around the clock. */
 .clock{
 	width: 300px;
 	height: 300px;
+	/* rbga gives us a white background to the clock with 80% opacity*/
 	background-color: rgba(255, 255, 255, .8);
 	border-radius: 50%;
 	border: 2px solid black;
 	position: relative;
 }
 
+/* this section customizes the numbers on the clock*/
 .clock .number{
+	/*this variable determines the location of the number on the clock*/
 	--rotation: 0;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	/* because each number should be in a different place on the clock,
+	this line rotates the number at an angle related to a variable that 
+	will be assigned later */
 	transform: rotate(var(--rotation));
 	font-size: 1.5rem;
 }
 
+/* here, we define the rotation variable for each number.  since there
+ are 12 numbers and 360 degrees in a circle, we increment the rotation 
+ by 30 degrees for every number.  notice how we only go up to 11 because
+ 12 is already on the clock at 0 degrees */
 .clock .number1 { --rotation: 30deg; }
 .clock .number2 { --rotation: 60deg; }
 .clock .number3 { --rotation: 90deg; }
@@ -43,31 +67,53 @@ body{
 .clock .number10 { --rotation: 300deg; }
 .clock .number11 { --rotation: 330deg; }
 
+/* here we define the hands on the clock*/
 .clock .hand {
+	/* these elements also must be rotated to a variant degree, hence a
+	rotation variable */
 	--rotation: 0;
 	position: absolute;
+	/* the following two lines move our hands to the center of our clock div*/
 	bottom: 50%;
 	left: 50%;
+	/* we'll also add a border to the hands so that they're easier to
+	look at when they're overlapping*/
 	border: 1px solid white;
+	/* the following two lines give our hands a rounded edge*/
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	/* this next line makes sure the bottom of our hands are anchored at
+	the center of the clock. if we didn't have these lines, our hands would
+	rotate with their centers as their axle. with these lines, they rotate 
+	with their own ends, or the center of the clock, as their axle*/
 	transform-origin: bottom;
+	/* transform moves our hands at a degree related to the rotation variable.
+	this line is what makes the hands move every second. */
 	transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
 }
 
+/* this section styles the black dot in the center of the clock*/
 .clock::after {
 	content: '';
 	position: absolute;
 	background-color: black;
+	/* z-index makes sure this item overlaps the hands*/
 	z-index: 13;
 	width: 15px;
 	height: 15px;
+	/* these next two lines position this dot*/
 	top: 50%;
 	left: 50%;
+	/* transform puts this dot at the center of our clock*/
 	transform: translate(-50%, -50%);
+	/* once again, we use border-radius to make a circle*/
 	border-radius: 50%;
 }
 
+/*these last 3 sections customize the appearance of each of the hands.
+the second hand should be the longest and thinnest and the hour hand
+should be the shortest and widest. both the minute and hour hands should
+be black while the second hand should be red.*/
 .clock .hand.second{
 	width: 3px;
 	height: 45%;

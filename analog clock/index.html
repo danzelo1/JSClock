@@ -6,6 +6,27 @@
 	<link rel="stylesheet" href="style.css" >
 </head>
 <body>
+	<form>
+		<div class="timezone">
+			<p>Select Timezone:</p>
+			<input type="radio" id="est" name="tz" value="est">
+			<label for="est">Eastern Standard Time</label><br>
+			<input type="radio" id="cst" name="tz" value="cst">
+			<label for="cst">Central Standard Time</label><br>
+			<input type="radio" id="mst" name="tz" value="mst">
+			<label for="mst">Mountain Standard Time</label><br>
+			<input type="radio" id="pst" name="tz" value="pst">
+			<label for="pst">Pacific Standard Time</label><br>
+			<input type="radio" id="ast" name="tz" value="ast">
+			<label for="ast">Alaska Standard Time</label><br>
+			<input type="radio" id="hst" name="tz" value="hst">
+			<label for="hst">Hawaii-Aleutian Standard Time</label><br>
+			<br>
+			<button type="button" value="Submit" onclick="changeClock()"> Submit </button>
+			<br>
+			<div id="result"></div> 
+		</div>
+	</form>
 	<div class="clock">
 		<div class="hour">
 			<div class="hr" id="hr"></div>
@@ -17,20 +38,39 @@
 			<div class="sc" id="sc"></div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		const deg = 6;
-		const hr = document.querySelector("#hr");
-		const mn = document.querySelector("#mn");
-		const sc = document.querySelector("#sc");
-		setInterval(() => {
-			let day = new Date();
-			let hh = day.getHours() * 30;
-			let mm = day.getMinutes() * deg;
-			let ss = day.getSeconds() * deg;
-			hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`;
-			mn.style.transform = `rotateZ(${mm}deg)`;
-			sc.style.transform = `rotateZ(${ss}deg)`;
-		})
-	</script>
 </body>
+<script type="text/javascript">
+	const deg = 6;
+	var offset = 0;
+	const hr = document.querySelector("#hr");
+	const mn = document.querySelector("#mn");
+	const sc = document.querySelector("#sc");
+
+	function changeClock() { 
+		document.getElementById("result").innerHTML = "";
+		var ele = document.getElementsByName('tz'); 
+		var timezone = ele[1].value;
+		var offset = 0;
+    	for(i = 0; i < ele.length; i++) { 
+			if(ele[i].type="radio"){
+				if(ele[i].checked) timezone = ele[i].value; 
+			}
+		} 
+		if (timezone = "est"){
+			document.getElementById("result").innerHTML 
+								= "hello"; 
+			offset = 3;
+		}
+	}
+	setInterval(() => {
+		let day = new Date();
+		let hh = (day.getHours() + offset) * 30;
+		let mm = day.getMinutes() * deg;
+		let ss = day.getSeconds() * deg;
+		hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`;
+		mn.style.transform = `rotateZ(${mm}deg)`;
+		sc.style.transform = `rotateZ(${ss}deg)`;
+	})
+		
+</script>
 </html>

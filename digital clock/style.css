@@ -4,6 +4,9 @@
 	box-sizing: border-box;
 
 }
+
+/* everything in the body section just makes sure our time is in our
+preferred font and size, and that all items are centered on the page */
 body
 {
 	display: flex;
@@ -15,7 +18,10 @@ body
 	min-height: 100vh;
 	background: #a5b8d9;
 }
-
+/* here we build the box around our clock
+we simply have a 400x150 px box with a border and a box shadow for
+aesthetic purposes.
+we also want to make sure all items are centered in the box */
 .clock
 {
 	width: 400px;
